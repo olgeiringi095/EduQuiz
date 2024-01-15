@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="/js/jQuery.js"></script>
+</head>
+<body>
+<!--/*  Næsta lína þarf að vera */-->
+<div th:fragment="quiz-add-edit-form">
+    <div class="form-group">
+        <label for="title" class="font-weight-bold">Titill</label>
+        <input type="text" th:field="*{title}" id="title" placeholder="Titill" class="form-control"
+               th:classappend="${#fields.hasErrors('title')} ? is-invalid">
+        <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="description" class="font-weight-bold">Lýsing og leiðbeiningar</label>
+        <input type="text" th:field="*{description}" id="description" placeholder="Lýsing og leiðbeiningar"
+               class="form-control" th:classappend="${#fields.hasErrors('description')} ? is-invalid">
+        <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    </div>
+    <div class="form-group">
+        <label class="font-weight-bold mb-0">Flokkar</label>
+        <div class="form-check">
+            <div th:each="category, i : ${T(is.hi.hbv501g.eduquiz.Entities.Category).values()}">
+                                          <span th:if="${{category}} != 'MULTIPLECHOICE' and ${{category}} != 'PICTURE'">
+                                              <input type="checkbox" th:id="${{category}}" th:value="${{category}}"
+                                                     th:field="*{categories}" class="form-check-input"/>
+                                              <label th:for="${{category}}" th:text="${category.displayName}"
+                                                     class="form-check-label"></label>
+                                         </span>
+            </div>
+        </div>
+    </div>
+
+    <div th:each="question, i : *{questions}">
+        <div class="form-row">
+            <div class="mb-3 mr-1">
+                <label th:if="${quizFormDto.type.name() == 'questionsAreImageUrl'}" class="font-weight-bold">Spurning(vefslóð
+                    á mynd)</label>
+                <label th:if="${quizFormDto.type.name() == 'questionsAreText'}"
+                       class="font-weight-bold">Spurning</label>
+                <input th:field="*{questions[__${i.index}__]}" th:id="${question}"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('questions[__${i.index}__]')} ? is-invalid"/>
+                <div th:if="${#fields.hasErrors('questions[__${i.index}__]')}"
+                     th:errors="*{questions[__${i.index}__]}" class="text-danger">
+                </div>
+            </div>
+            <div class="mb-3 mr-1" th:each="answer, j : *{listOfAnswers[__${i.index}__]}">
+                <label th:if="${j.index == 0}" class="font-weight-bold">Rétt svar</label>
+                <label th:unless="${j.index == 0}" class="font-weight-bold">Rangt svar</label>
+                <input th:field="*{listOfAnswers[__${i.index}__][__${j.index}__]}" th:id="${answer}"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('listOfAnswers[__${i.index}__][__${j.index}__]')} ? is-invalid"/>
+                <div th:if="${#fields.hasErrors('listOfAnswers[__${i.index}__][__${j.index}__]')}"
+                     th:errors="*{listOfAnswers[__${i.index}__][__${j.index}__]}"
+                     class="text-danger">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="mb-3 mr-1">
+    <input type="submit" name="addquestion" value="Bæta við spurningu" class="btn btn-secondary mt-1"/>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

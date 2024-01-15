@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src = "/js/jQuery.js"></script>
+    </head>
+    <body>
+        <!--/*  Næsta lína þarf að vera */-->
+        <div th:fragment="footer" class="mt-4">
+
+            <footer class="bg-dark text-white mt-3 fixed-bottom">
+                <div class="container-fluid py-3">
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <h5 class="text-uppercase text-light">HBV501G Hugbúnaðarverkefni 1</h5>
+                            <p class="text-light">Lokaverkefni í HBV501G. Unnið af Birki, Einari og Sveini</p>
+
+                        </div>
+                        <hr class="clearfix w-100 d-md-none pb-3">
+                        <div class="col-md-3 mb-md-0 mb-3">
+
+                        </div>
+                        <div class="col-md-3 mb-md-0 mb-3">
+                            <h5 class="text-uppercase text-light">Tækni notuð</h5>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="https://spring.io/">Java Spring</a>
+                                </li>
+                                <li>
+                                    <a href="https://jquery.com/">JQuery</a>
+                                </li>
+                                <li>
+                                    <a href="https://getbootstrap.com/">Bootstrap</a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/">Github</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright text-center py-3 text-light">© 2020 - Háskóli Íslands</div>
+            </footer>
+        </div>
+    </body>
+</html>
